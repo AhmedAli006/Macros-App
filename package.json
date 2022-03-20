@@ -17,6 +17,7 @@
     "@react-native-google-signin/google-signin": "^7.1.0",
     "@ui-kitten/components": "^5.1.1",
     "@ui-kitten/eva-icons": "^5.1.1",
+    "axios": "^0.26.1",
     "react": "17.0.2",
     "react-native": "0.67.3",
     "react-native-svg": "^9.13.6"

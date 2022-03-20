@@ -1,4 +1,26 @@
 // TODO: Replace with your app's Firebase project configuration
+import { initializeApp } from "firebase/app";
+// Authentication
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
+//Database
+import {
+  getDatabase,
+  onChildAdded,
+  child,
+  ref,
+  push,
+  update,
+  set,
+  onValue,
+  remove
+} from "firebase/database";
+
 var firebaseConfig = {
   apiKey: "AIzaSyCRl3at5HwckI2y5guaceByVFzQDwn2dF0",
   authDomain: "PROJECT_ID.firebaseapp.com",
@@ -16,3 +38,24 @@ firebase.initializeApp(firebaseConfig);
 
 // Get a reference to the database service
 var database = firebase.database();
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const database = getDatabase(app);
+
+export {
+  auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  database,
+  onChildAdded,
+  child,
+  ref,
+  push,
+  update,
+  set,
+  onValue,
+  remove
+};

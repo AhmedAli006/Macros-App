@@ -11,22 +11,22 @@ import {
   View,
 } from 'react-native';
 import s from '../styling';
-import auth from '@react-native-firebase/auth';
+import auth, { firebase } from '@react-native-firebase/auth';
  import database from '@react-native-firebase/database';
 
 const reference = database().ref('/users/');
 
 const style = StyleSheet.create(s);
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  text: {
-    margin: 2,
-  },
+// const styles = StyleSheet.create({
+//   row: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   text: {
+//     margin: 2,
+//   },
 
-});
+// });
 
 
 export default function Signin() {
@@ -37,6 +37,7 @@ export default function Signin() {
 
   const signUp = () => {
     console.log(Obj);
+   
     auth()
       .createUserWithEmailAndPassword(Obj.email, Obj.password)
       .then(user => {
@@ -60,57 +61,51 @@ export default function Signin() {
 
         console.error(error);
       });
+
+   
 }
 
 
     return (
-      <>
-        <View style={[s.main, s.bgWhite]}>
-          <View style={[s.flexCenter, {flex: 3}]}>
-            <View style={[s.p1]}>
-             
-              <Text style={styles.text} category='h2'>Sign In</Text>
-            </View>
-            <View>
-              <View style={[s.p1]}>
-                <TextInput
-                  onChangeText={(e) => setObj({ ...Obj, name: e })}
-                  style={[s.input]}
-                  placeholder="name"
-                />
-              </View>
-              <View style={[s.p1]}>
-                <TextInput
-                  onChangeText={(e) => setObj({...Obj, email:e})}
-                  style={[s.input]}
-                  placeholder="email"
-                />
-              </View>
-              <View style={[s.p1]}>
-                <TextInput
-                  onChangeText={(e) => setObj({...Obj, password:e})}
-                  style={[s.input]}
-                  placeholder="password"
-                  secureTextEntry={true}
-                />
-               
-              </View>
-            </View>
-            <View>
-              
-              <TouchableOpacity onPress={signUp} style={[s.btn]}>
-                <Text style={[s.txtWhite, s.fs5]}>SignIn</Text>
-              </TouchableOpacity>
-            </View>
-            <View>
-            
-            </View>
-          </View>
+<>
+
+    <View style={[styles.container ]}>
+        <View>
+          <Text style={styles.heading}>SIGNUP</Text>
+          <Text style={styles.dash}>_</Text>
         </View>
-      </>
+        <View>
+            <TextInput
+            style={styles.inputField}
+            type="email"
+            placeholder="Enter name"
+            onChangeText={(e) => setObj({ ...Obj, name: e })}
+          />
+          <TextInput
+            style={styles.inputField}
+            type="email"
+            placeholder="Enter email"
+            onChangeText={(e) => setObj({...Obj, email:e})}
+          />
+          <TextInput
+            style={styles.inputField}
+            secureTextEntry
+            textContentType="password"
+            placeholder="Enter Password"
+            onChangeText={(e) => setObj({...Obj, password:e})}
+          />
+        </View>
+        <View style={styles.signUpBtnMain}>
+          <Button onPress={signUp} style={styles.signUpBtn} title="Sign up" />
+        </View>
 
-
-
+        {/* <View>
+          <Text style={styles.bottomText}>
+            don't have an account <Text style={styles.link}>Signup</Text>{" "}
+          </Text>
+        </View> */}
+      </View>
+</>
 
       
   
@@ -118,5 +113,56 @@ export default function Signin() {
   };
 
 
- 
+ const styles = StyleSheet.create({
+  
+  container: {
+    height: "100%",
+   backgroundColor:"white",
+    justifyContent:'center',
+    flex:1,
+  },
+  heading: {
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#0971f1",
+     marginLeft: 50,
+    marginRight: 50,
+
+  },
+  dash: {
+    fontSize: 35,
+    fontWeight: "bold",
+    color: "#0971f1",
+    marginBottom: 10,
+    marginTop:-20,
+     marginLeft: 50,
+    marginRight: 50,
+  },
+  inputField: {
+    paddingVertical: 11,
+    paddingHorizontal: 9,
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: "#d3d3d3",
+    marginVertical: 10,
+     marginLeft: 50,
+    marginRight: 50,
+  },
+  signUpBtn: {
+    backgroundColor: "#0971f1",
+  },
+
+  signUpBtnMain: {
+    marginVertical: 10,
+     marginLeft: 50,
+    marginRight: 50,
+  },
+  bottomText: {
+    marginTop: 20,
+    color: "gray"
+  },
+  link: {
+    color: "#0971f1"
+  }
+});
 
